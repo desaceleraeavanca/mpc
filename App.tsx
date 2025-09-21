@@ -23,7 +23,7 @@ const App: React.FC = () => {
   const selectedChapter = BOOK_CONTENT.find(c => c.id === selectedChapterId) || BOOK_CONTENT[0];
 
   return (
-    <div className="flex h-screen bg-gray-100 font-sans antialiased">
+    <div className="flex h-screen bg-slate-100 font-sans antialiased">
       <Sidebar
         chapters={BOOK_CONTENT}
         activeChapterId={selectedChapterId}
