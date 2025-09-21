@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { ContentDisplay } from './components/ContentDisplay';
-import { BOOK_CONTENT } from './constants';
+import { BOOK_CONTENT, CHAPTER_COMPLETION_REQUIREMENTS } from './constants';
 
 const App: React.FC = () => {
   const [selectedChapterId, setSelectedChapterId] = useState<number>(0);
@@ -20,6 +20,20 @@ const App: React.FC = () => {
     }));
   };
 
+  const completedChapterIds = useMemo(() => {
+    const completedIds = new Set<number>();
+    for (const chapter of BOOK_CONTENT) {
+      const requirements = CHAPTER_COMPLETION_REQUIREMENTS[chapter.id];
+      if (requirements && requirements.length > 0) {
+        const isComplete = requirements.every(key => formData[key] === true);
+        if (isComplete) {
+          completedIds.add(chapter.id);
+        }
+      }
+    }
+    return completedIds;
+  }, [formData]);
+
   const selectedChapter = BOOK_CONTENT.find(c => c.id === selectedChapterId) || BOOK_CONTENT[0];
 
   return (
@@ -28,6 +42,7 @@ const App: React.FC = () => {
         chapters={BOOK_CONTENT}
         activeChapterId={selectedChapterId}
         onSelectChapter={setSelectedChapterId}
+        completedChapterIds={completedChapterIds}
       />
       <main className="flex-1 overflow-y-auto">
         <ContentDisplay chapter={selectedChapter} formData={formData} handleInputChange={handleInputChange} />

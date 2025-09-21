@@ -1950,3 +1950,18 @@ export const BOOK_CONTENT: Chapter[] = [
     ),
   },
 ];
+
+export const CHAPTER_COMPLETION_REQUIREMENTS: Record<number, string[]> = {
+  0: ['c0_commitment'],
+  1: ['c1_task_done', 'c1_5min_rule_done', 'c1_mvp_created', 'c1_exercise_commit'],
+  2: [], // No checkboxes
+  3: ['c3_priorities_visible_check', 'c3_minimize_interruptions_check', 'c3_act_with_focus_check', 'c3_take_breaks_check', 'c3_celebrate_progress_check'],
+  4: ['c4_test_executed'],
+  5: ['c5_action_done', 'c5_pause_done'],
+  6: ['c6_ethics_check1', 'c6_ethics_check2', 'c6_ethics_check3', 'c6_action_done'],
+  7: ['c7_action_taken', 'c7_exercise_commit_amplify', 'c7_exercise_commit_reduce'],
+  8: ['c8_barbell_safety_check', 'c8_barbell_opportunity_check', 'c8_exercise_action_done'],
+  9: ['c9_d5_practiced', 'c9_d6_done'],
+  10: ['c10_review_scheduled'],
+  11: ['c11_action_done', 'c11_declaration_done', 'c11_sharing_done', 'c11_priority_written'],
+};

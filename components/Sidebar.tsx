@@ -1,15 +1,16 @@
 
 import React from 'react';
 import type { Chapter } from '../types';
-import { BookOpen } from './Icons';
+import { BookOpen, CheckCircle } from './Icons';
 
 interface SidebarProps {
   chapters: Chapter[];
   activeChapterId: number;
   onSelectChapter: (id: number) => void;
+  completedChapterIds: Set<number>;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ chapters, activeChapterId, onSelectChapter }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ chapters, activeChapterId, onSelectChapter, completedChapterIds }) => {
   return (
     <aside className="w-64 md:w-80 bg-violet-900 text-white flex flex-col flex-shrink-0">
       <div className="p-5 border-b border-violet-800 flex items-center space-x-3">
@@ -32,7 +33,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ chapters, activeChapterId, onS
                 : 'text-violet-200 hover:bg-violet-800 hover:text-white'
             }`}
           >
-            {chapter.shortTitle}
+            <div className="flex items-center justify-between">
+                <span>{chapter.shortTitle}</span>
+                {completedChapterIds.has(chapter.id) && (
+                    <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                )}
+            </div>
           </button>
         ))}
       </nav>
